@@ -1,0 +1,48 @@
+version: 0.1.0
+type: plugin
+author: dataeyesai
+name: dataeyes
+label:
+  en_US: DataEyes
+  ja_JP: DataEyes
+  zh_Hans: DataEyes
+  pt_BR: DataEyes
+description:
+  en_US: Web content extraction tool powered by computing power and AI technology, provided by DataEyes AI
+  ja_JP: 算力とAI技術に基づくウェブコンテンツ抽出ツール、DataEyes AI提供
+  zh_Hans: 基于算力和AI技术的网页内容提取工具，由数眼智能提供
+  pt_BR: Ferramenta de extração de conteúdo web baseada em poder computacional e tecnologia de IA, fornecida pela DataEyes AI
+icon: icon.svg
+resource:
+  memory: 268435456
+  permission:
+    tool:
+      enabled: false
+    model:
+      enabled: false
+      llm: false
+      text_embedding: false
+      rerank: false
+      tts: false
+      speech2text: false
+      moderation: false
+plugins:
+  tools:
+    - provider/dataeyes.yaml
+meta:
+  version: 0.1.0
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+  minimum_dify_version: null
+created_at: 2025-06-09T16:26:50.038032+08:00
+privacy: PRIVACY.md
+repo: https://github.com/dataeyesai/dataeyes
+verified: false
+tags:
+  - search
+  - utilities
