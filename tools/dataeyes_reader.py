@@ -1,10 +1,9 @@
 from collections.abc import Generator
 from typing import Any
 
+import requests
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
-import requests
-
 
 READER_ENDPOINT = "https://api.shuyanai.com/v1/reader"
 
@@ -14,9 +13,7 @@ class DataEyesReaderTool(Tool):
         api_key = self.runtime.credentials.get("dataeyes_api_key")
 
         if not api_key:
-            yield self.create_text_message(
-                "DataEyes API key is missing. Please set the 'dataeyes_api_key' in credentials."
-            )
+            yield self.create_text_message("DataEyes API key is missing. Please set the 'dataeyes_api_key' in credentials.")
             return
 
         url = tool_parameters.get("url", "")
@@ -43,11 +40,13 @@ class DataEyesReaderTool(Tool):
             yield self.create_text_message(f"Request failed: {str(e)}")
             return
 
-        yield self.create_json_message(result)
-
         if result.get("code") == 0 and "data" in result:
             data = result["data"]
+            yield self.create_json_message(data)
+
+            title = data.get("title", "")
             markdown = data.get("markdown", "")
-            yield self.create_text_message(markdown)
+            formatted_result = f"URL: {url}\nTitle: {title}\nMarkdown Content:\n{markdown}"
+            yield self.create_text_message(formatted_result)
         else:
             yield self.create_text_message(f"Error: {result.get('msg')}")

@@ -44,5 +44,5 @@ If you have any questions about this privacy policy, please contact us through t
 
 ---
 
-**Last Updated**: June 10, 2025
-**Plugin Version**: 0.1.0
+**Last Updated**: June 25, 2025
+**Plugin Version**: 0.1.1
